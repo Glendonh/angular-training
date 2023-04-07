@@ -1,0 +1,24 @@
+<div class="container">
+  <h3>{{ product?.title }}</h3>
+  <img class="image" src="{{ product?.image }}" />
+  <p>{{ product?.price | currency }}</p>
+
+  <div class="progress-bar inset">
+    <div
+      class="progress-bar-inner"
+      [ngStyle]="{ width: product?.rating.rate * 20 + '%' }"
+    >
+      <p class="rating-text">{{ product?.rating?.rate }} out of 5</p>
+    </div>
+  </div>
+  <p>{{ product?.rating?.count }} reviews</p>
+  <div class="description-wrapper">
+    <p>{{ product?.description }}</p>
+  </div>
+  <div class="btn-group">
+    <button class="btn-qty" (click)="decreaseQty()">-</button>
+    <div class="qty-display">{{ qty }}</div>
+    <button class="btn-qty" (click)="increaseQty()">+</button>
+    <button class="btn-order">Add To Cart</button>
+  </div>
+</div>

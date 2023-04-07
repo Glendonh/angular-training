@@ -1,0 +1,7 @@
+<div class="card" (click)="onSelect(product.id)">
+  <div>
+    <h3>{{ product.title }}</h3>
+    <img class="thumbnail" src="{{ product.image }}" />
+  </div>
+  <p>{{ product.price | currency }}</p>
+</div>
