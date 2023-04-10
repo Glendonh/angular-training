@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cart {
+  border-color: #fff #002244 #002244 #fff;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.item-container {
+  border: 1px solid #fff;
+  box-shadow: #848484 -1px -1px 0px 1px, #848484 -1px -1px 0px 1px inset;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.total-text {
+  text-align: right;
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.title-row {
+  background-color: #002244;
+  padding: 4px;
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+}
+
+.title {
+  color: #fff;
+  margin: 0;
+}

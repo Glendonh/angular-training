@@ -1,0 +1,24 @@
+<div *ngIf="detailedCart" class="cart">
+  <div class="title-row">
+    <p class="title">Cart</p>
+  </div>
+  <div *ngFor="let prod of detailedCart.cartProducts" class="item-container">
+    <p>{{ prod.title }}</p>
+    <hr />
+    <div class="row">
+      <div>
+        <p>Price:</p>
+        <p>{{ prod.price | currency }}</p>
+      </div>
+      <div>
+        <p>Quantity:</p>
+        <p>{{ prod.qty }}</p>
+      </div>
+      <div>
+        <p>Subtotal:</p>
+        <p>{{ prod.subTotal | currency }}</p>
+      </div>
+    </div>
+  </div>
+  <p class="total-text">Total: {{ detailedCart.totalPrice | currency }}</p>
+</div>

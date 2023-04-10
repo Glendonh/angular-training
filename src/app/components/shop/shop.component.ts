@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { ProductService } from '../../services/product.service';
+import { Observable } from 'rxjs';
 
 interface Product {
   id: number;
@@ -24,12 +25,10 @@ interface Product {
 })
 export class ShopComponent implements OnInit {
   constructor(private _productService: ProductService) {}
-  products: Product[] = [];
+  products: Observable<Product[]>;
 
   ngOnInit() {
     console.log('init');
-    this._productService.getProducts().subscribe((res) => {
-      this.products = res;
-    });
+    this.products = this._productService.getProducts();
   }
 }

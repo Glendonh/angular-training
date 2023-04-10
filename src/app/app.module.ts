@@ -4,6 +4,7 @@ import 'zone.js/dist/zone';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopComponent } from './components/shop/shop.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'cart', component: CartComponent },
   { path: '', redirectTo: '/shop', pathMatch: 'full' },
 ];
 
@@ -21,6 +23,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     ShopComponent,
+    CartComponent,
     ProductDetailsComponent,
     RouterModule.forRoot(routes),
   ],
