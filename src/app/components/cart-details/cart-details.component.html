@@ -1,9 +1,12 @@
 <div *ngIf="detailedCart" class="cart">
-  <div class="title-row">
-    <p class="title">Cart</p>
+  <div class="header-row">
+    <p class="header">Cart</p>
   </div>
   <div *ngFor="let prod of detailedCart.cartProducts" class="item-container">
-    <p>{{ prod.title }}</p>
+    <div class="title-row">
+      <img class="img" src="{{ prod.image }}" />
+      <p>{{ prod.title }}</p>
+    </div>
     <hr />
     <div class="row">
       <div>

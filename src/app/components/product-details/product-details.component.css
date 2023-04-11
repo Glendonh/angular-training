@@ -8,7 +8,9 @@
 }
 
 .image {
-  border: 1px solid #002244;
+  border-color: #848484 #ccc #ccc #848484;
+  border-width: 2px;
+  border-style: solid;
   max-width: 100%;
 }
 
@@ -17,8 +19,8 @@
   width: 50%;
   height: 2rem;
   display: flex;
-  border-color: #002244 #fff #fff #002244;
-  border-width: 1px;
+  border-color: #848484 #ccc #ccc #848484;
+  border-width: 2px;
   border-style: solid;
 }
 
@@ -61,8 +63,8 @@
   padding: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-color: #fff #002244 #002244 #fff;
-  border-width: 1px;
+  border-color: #ccc #002244 #002244 #ccc;
+  border-width: 2px;
   border-style: solid;
   box-shadow: 1px 1px 1px #002244, 3px 3px 6px 1px #8091a2;
   background-color: #a5acaf;
@@ -72,14 +74,14 @@
 .btn-qty:active {
   box-shadow: inset 1px 1px 3px #002244;
   border-width: 0px 2px 2px 0px;
-  border-color: #fff;
+  border-color: #ccc;
   outline: 0;
 }
 
 .btn-order {
   padding: 0.5rem;
-  border-color: #fff #002244 #002244 #fff;
-  border-width: 1px;
+  border-color: #ccc #002244 #002244 #ccc;
+  border-width: 2px;
   border-style: solid;
   box-shadow: 1px 1px 1px #002244, 3px 3px 6px 1px #8091a2;
   background-color: #a5acaf;
@@ -89,6 +91,6 @@
 .btn-order:active {
   box-shadow: inset 1px 1px 3px #002244;
   border-width: 0px 2px 2px 0px;
-  border-color: #fff;
+  border-color: #ccc;
   outline: 0;
 }
