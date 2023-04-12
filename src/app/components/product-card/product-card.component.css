@@ -24,6 +24,7 @@
 .thumbnail {
   max-width: 100%;
   border: 1px solid #002244;
+  align-self: center;
 }
 
 .btn-order {

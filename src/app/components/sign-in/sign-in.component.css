@@ -1,0 +1,38 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-window {
+  border-color: #ccc #002244 #002244 #ccc;
+  border-width: 2px;
+  border-style: solid;
+  padding: 0.25rem;
+  width: 75%;
+}
+
+.header-row {
+  background-color: #002244;
+  padding: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.header {
+  color: #fff;
+  margin: 0;
+}
+
+.input-column {
+  flex-direction: column;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+input {
+  width: 100%;
+  border-color: #848484 #ccc #ccc #848484;
+  border-width: 2px;
+  border-style: solid;
+}

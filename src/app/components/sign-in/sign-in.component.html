@@ -1,0 +1,18 @@
+<div class="screen">
+  <div class="login-window">
+    <div class="header-row">
+      <p class="header">Please Sign In</p>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+      <div class="input-column">
+        <label>Email</label>
+        <input formControlName="email" />
+      </div>
+      <div class="input-column">
+        <label>Password</label>
+        <input formControlName="password" />
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</div>
