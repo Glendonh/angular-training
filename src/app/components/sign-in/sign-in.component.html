@@ -6,13 +6,32 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
       <div class="input-column">
         <label>Email</label>
-        <input formControlName="email" />
+        <input formControlName="email" [pattern]="emailRegex" required />
+        <div
+          *ngIf="
+            (loginForm?.controls.email.touched || submitted) &&
+            loginForm?.controls.email.errors
+          "
+          class="error-wrapper"
+        >
+          <p *ngIf="loginForm?.controls.email.errors?.required">Required</p>
+          <p *ngIf="loginForm?.controls.email.errors?.pattern">Invalid Email</p>
+        </div>
       </div>
       <div class="input-column">
         <label>Password</label>
-        <input formControlName="password" />
+        <input formControlName="password" type="password" required />
+        <div
+          *ngIf="
+            (loginForm?.controls.password.touched || submitted) &&
+            loginForm?.controls.password.errors
+          "
+          class="error-wrapper"
+        >
+          <p *ngIf="loginForm?.controls.password.errors?.required">Required</p>
+        </div>
       </div>
-      <button type="submit">Sign In</button>
+      <button class="submit-btn" type="submit">Sign In</button>
     </form>
   </div>
 </div>

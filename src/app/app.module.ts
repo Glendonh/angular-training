@@ -11,13 +11,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth.service';
+import { AuthGateService } from './services/auth-gate.service';
 
 const routes: Routes = [
-  { path: 'shop', component: ShopComponent },
-  { path: 'product/:id', component: ProductDetailsComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'shop', component: ShopComponent, canActivate: [AuthGateService] },
+  {
+    path: 'product/:id',
+    component: ProductDetailsComponent,
+    canActivate: [AuthGateService],
+  },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGateService] },
   { path: 'login', component: SignInComponent },
-  { path: '', redirectTo: '/shop', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: '/shop',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
@@ -32,6 +42,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
   ],
+  providers: [AuthService, AuthGateService],
   declarations: [AppComponent, NavbarComponent],
   bootstrap: [AppComponent],
 })
