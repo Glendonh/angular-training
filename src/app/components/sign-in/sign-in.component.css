@@ -75,6 +75,10 @@ input {
   border-color: #ccc;
 }
 
+.hourglass {
+  align-self: flex-end;
+}
+
 form {
   display: flex;
   flex-direction: column;

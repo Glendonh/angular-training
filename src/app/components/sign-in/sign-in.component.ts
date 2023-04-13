@@ -24,6 +24,7 @@ export class SignInComponent implements OnInit {
   submitted = false;
   error: Observable<string>;
   loading: Observable<boolean>;
+  imagePath = 'assts/hg.jpeg';
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService

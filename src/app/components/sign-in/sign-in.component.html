@@ -33,7 +33,11 @@
       <div *ngIf="error | async" class="error-wrapper">
         <p>{{ error | async }}</p>
       </div>
-      <img src="src/assets/hourglass.gif" />
+      <img
+        class="hourglass"
+        *ngIf="loading | async"
+        src="assets/hourglass.gif"
+      />
       <button *ngIf="!(loading | async)" class="submit-btn" type="submit">
         Sign In
       </button>
