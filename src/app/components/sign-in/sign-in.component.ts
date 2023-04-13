@@ -6,8 +6,8 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -18,26 +18,28 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignInComponent implements OnInit {
   loginForm: FormGroup<{
-    email: FormControl<string>;
+    username: FormControl<string>;
     password: FormControl<string>;
   }>;
-  emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   submitted = false;
+  error: Observable<string>;
+  loading: Observable<boolean>;
   constructor(
     private formbuilder: FormBuilder,
-    private router: Router,
     private authService: AuthService
   ) {
-    this.loginForm = this.formbuilder.group({ email: '', password: '' });
+    this.loginForm = this.formbuilder.group({ username: '', password: '' });
   }
   onSubmit(val) {
     this.submitted = true;
-    console.log(this.loginForm);
     if (this.loginForm.status === 'VALID') {
-      this.authService.logIn();
-      this.router.navigate(['shop']);
+      this.authService.logIn(this.loginForm.getRawValue());
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.logOut();
+    this.error = this.authService.getError();
+    this.loading = this.authService.getLoading();
+  }
 }

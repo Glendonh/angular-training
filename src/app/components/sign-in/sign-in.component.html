@@ -5,17 +5,16 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
       <div class="input-column">
-        <label>Email</label>
-        <input formControlName="email" [pattern]="emailRegex" required />
+        <label>User name</label>
+        <input formControlName="username" required />
         <div
           *ngIf="
-            (loginForm?.controls.email.touched || submitted) &&
-            loginForm?.controls.email.errors
+            (loginForm?.controls.username.touched || submitted) &&
+            loginForm?.controls.username.errors
           "
           class="error-wrapper"
         >
-          <p *ngIf="loginForm?.controls.email.errors?.required">Required</p>
-          <p *ngIf="loginForm?.controls.email.errors?.pattern">Invalid Email</p>
+          <p *ngIf="loginForm?.controls.username.errors?.required">Required</p>
         </div>
       </div>
       <div class="input-column">
@@ -31,7 +30,12 @@
           <p *ngIf="loginForm?.controls.password.errors?.required">Required</p>
         </div>
       </div>
-      <button class="submit-btn" type="submit">Sign In</button>
+      <div *ngIf="error | async" class="error-wrapper">
+        <p>{{ error | async }}</p>
+      </div>
+      <button *ngIf="!(loading | async)" class="submit-btn" type="submit">
+        Sign In
+      </button>
     </form>
   </div>
 </div>

@@ -21,7 +21,6 @@ export class ProductDetailsComponent implements OnInit {
     this.qty++;
   }
   decreaseQty() {
-    console.log('D');
     if (this.qty > 1) {
       this.qty--;
     }

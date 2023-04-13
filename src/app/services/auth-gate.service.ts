@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   CanActivate,
   CanActivateChild,
@@ -9,10 +9,13 @@ import {
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthGateService implements CanActivate {
+export class AuthGateService implements CanActivate, OnInit {
   constructor(private authService: AuthService, private router: Router) {}
+  ngOnInit() {
+    console.log('initing');
+  }
   canActivate() {
-    if (this.authService.getIsAutheticated()) {
+    if (this.authService.getIsAutheticated().value) {
       return true;
     }
     this.router.navigate(['login']);

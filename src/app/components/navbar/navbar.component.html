@@ -1,8 +1,8 @@
 <nav class="navbar-container">
   <h1>{{ name }}</h1>
-  <div>
+  <div *ngIf="isAuthenticated | async">
     <a routerLink="/shop">Home</a>
     <a routerLink="/cart">Cart</a>
-    <a routerLink="/login">Sign In</a>
+    <a routerLink="/login">Log Out</a>
   </div>
 </nav>
