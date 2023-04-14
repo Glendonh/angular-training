@@ -10,7 +10,7 @@ const works = {
 
 @Injectable()
 export class AuthService {
-  private authSubject = new BehaviorSubject(true);
+  private authSubject = new BehaviorSubject(false);
   private _error = new BehaviorSubject<string>('');
   private _loading = new BehaviorSubject(false);
   constructor(private _http: HttpClient, private _router: Router) {}
