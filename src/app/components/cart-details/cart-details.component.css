@@ -22,7 +22,12 @@
 
 .total-text {
   text-align: right;
-  margin-right: 0.5rem;
+  margin: 0.5rem;
+  font-weight: 600;
+}
+
+.cart-empty {
+  margin: 0.5rem;
   font-weight: 600;
 }
 
@@ -54,4 +59,41 @@
 
 p {
   margin: 0.5rem;
+}
+
+.num-input {
+  width: 1rem;
+  border-color: #848484 #ccc #ccc #848484;
+  border-width: 2px;
+  border-style: solid;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+button {
+  color: #002244;
+  background-color: #a5acaf;
+  border-color: #ccc #002244 #002244 #ccc;
+  border-width: 2px;
+  border-style: solid;
+  font-weight: 600;
+}
+
+button:active {
+  box-shadow: inset 1px 1px 3px #002244;
+  border-width: 0px 2px 2px 0px;
+  border-color: #ccc;
+}
+
+.remove-btn {
+  height: 1.5rem;
+  width: 1.75rem;
+  position: absolute;
+  right: 2.5rem;
 }

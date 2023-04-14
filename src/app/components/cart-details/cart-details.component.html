@@ -6,6 +6,9 @@
     <div class="title-row">
       <img class="img" src="{{ prod.image }}" />
       <p>{{ prod.title }}</p>
+      <button class="remove-btn" (click)="adjustQty(prod.id, 0)">
+        &#10005;
+      </button>
     </div>
     <hr />
     <div class="row">
@@ -15,7 +18,11 @@
       </div>
       <div>
         <p>Quantity:</p>
-        <p>{{ prod.qty }}</p>
+        <div class="input-row">
+          <button (click)="adjustQty(prod.id, prod.qty - 1)">-</button>
+          <input class="num-input" value="{{ prod.qty }}" />
+          <button (click)="adjustQty(prod.id, prod.qty + 1)">+</button>
+        </div>
       </div>
       <div>
         <p>Subtotal:</p>
@@ -23,5 +30,12 @@
       </div>
     </div>
   </div>
-  <p class="total-text">Total: {{ detailedCart.totalPrice | currency }}</p>
+  <div class="row">
+    <div *ngIf="!detailedCart.cartProducts.length" class="cart-empty">
+      Cart is empty
+    </div>
+    <div class="total-text">
+      Total: {{ detailedCart.totalPrice | currency }}
+    </div>
+  </div>
 </div>
