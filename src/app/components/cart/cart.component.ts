@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService, Cart } from '../../services/cart.service';
-import { ProductService, Product } from '../../services/product.service';
+import { CartService, Cart, DetailedCart } from '../../services/cart.service';
 import { Observable } from 'rxjs';
 import { CartDetailsComponent } from '../cart-details/cart-details.component';
 
@@ -13,15 +12,10 @@ import { CartDetailsComponent } from '../cart-details/cart-details.component';
   imports: [CommonModule, CartDetailsComponent],
 })
 export class CartComponent implements OnInit {
-  constructor(
-    private _cartService: CartService,
-    private _productService: ProductService
-  ) {}
-  cart: Observable<Cart>;
-  products: Observable<Product[]>;
+  constructor(private _cartService: CartService) {}
+  detailedCart: Observable<DetailedCart>;
 
   ngOnInit() {
-    this.cart = this._cartService.getCartById(1);
-    this.products = this._productService.getProducts();
+    this.detailedCart = this._cartService.getDetailedCartById(1);
   }
 }
