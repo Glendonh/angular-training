@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyPipe, CommonModule } from '@angular/common';
 import { ProductService, Product } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   standalone: true,
@@ -13,7 +14,8 @@ import { ProductService, Product } from '../../services/product.service';
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _cartService: CartService
   ) {}
   product: Product;
   qty: number = 1;
@@ -25,6 +27,10 @@ export class ProductDetailsComponent implements OnInit {
       this.qty--;
     }
   }
+  addToCart() {
+    this._cartService.addToCart(this.product.id, this.qty);
+    this.qty = 1;
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -32,5 +38,6 @@ export class ProductDetailsComponent implements OnInit {
         this.product = res;
       });
     });
+    this._cartService.getDetailedCartById(1);
   }
 }

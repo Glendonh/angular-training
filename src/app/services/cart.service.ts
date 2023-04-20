@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { take, combineLatest, BehaviorSubject } from 'rxjs';
 import { Product, ProductService } from './product.service';
 
 export interface Cart {
@@ -26,7 +26,6 @@ export class CartService {
     private _http: HttpClient,
     private _productService: ProductService
   ) {}
-  private rawCart: Observable<Cart>;
   private userId: number;
   private detailedCart: BehaviorSubject<DetailedCart> = new BehaviorSubject({
     cartProducts: [],
@@ -44,7 +43,7 @@ export class CartService {
     }
     return this.detailedCart.asObservable();
   }
-  generateDetailedCart(baseCart: Cart, products: Product[]) {
+  private generateDetailedCart(baseCart: Cart, products: Product[]) {
     const cartProducts: CartProduct[] = baseCart.products.map((prod) => {
       const product = products.find((p) => p.id === prod.productId);
       return {
@@ -55,6 +54,35 @@ export class CartService {
     });
     const totalPrice = this.findTotalPrice(cartProducts);
     return { cartProducts, totalPrice };
+  }
+  addToCart(productId: number, quantity: number) {
+    const current = this.detailedCart.value;
+    const productInCart = current.cartProducts.find(
+      (prod) => prod.id === productId
+    );
+    if (!!productInCart) {
+      this.adjustQty(productId, quantity + productInCart.qty);
+      alert(`Added ${quantity} to cart`);
+    } else {
+      this._productService
+        .getProducts()
+        .pipe(take(1))
+        .subscribe((prods) => {
+          const productDetails = prods.find((p) => p.id === productId);
+          const subTotal = quantity * productDetails.price;
+          const productEntry: CartProduct = {
+            ...productDetails,
+            qty: quantity,
+            subTotal,
+          };
+          const newProducts = current.cartProducts.concat(productEntry);
+          this.detailedCart.next({
+            cartProducts: newProducts,
+            totalPrice: current.totalPrice + subTotal,
+          });
+        });
+      alert(`Added ${quantity} to cart`);
+    }
   }
   adjustQty(productId: number, newQuantity: number) {
     const current = this.detailedCart.value;
