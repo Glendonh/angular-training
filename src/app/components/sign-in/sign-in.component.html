@@ -5,8 +5,8 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
       <div class="input-column">
-        <label>User name</label>
-        <input formControlName="username" required />
+        <label for="username">User name</label>
+        <input id="username" formControlName="username" required />
         <div
           *ngIf="
             (loginForm?.controls.username.touched || submitted) &&
@@ -18,8 +18,8 @@
         </div>
       </div>
       <div class="input-column">
-        <label>Password</label>
-        <input formControlName="password" type="password" required />
+        <label for="password">Password</label>
+        <input id="password" formControlName="password" type="password" required />
         <div
           *ngIf="
             (loginForm?.controls.password.touched || submitted) &&
@@ -36,7 +36,7 @@
       <img
         class="hourglass"
         *ngIf="loading | async"
-        src="assets/hourglass.gif"
+        src="/src/assets/hg.jpeg"
       />
       <button *ngIf="!(loading | async)" class="submit-btn" type="submit">
         Sign In

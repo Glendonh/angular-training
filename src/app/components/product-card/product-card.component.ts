@@ -13,7 +13,7 @@ import { Product } from '../../services/product.service';
 export class ProductCardComponent {
   @Input() product: Product;
   constructor(private _router: Router) {}
-  onSelect(id: number) {
+  onSelect() {
     this._router.navigate(['product/', this.product.id]);
   }
 }
