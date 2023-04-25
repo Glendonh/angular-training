@@ -13,6 +13,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { AuthGateService } from './services/auth-gate.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent, canActivate: [AuthGateService] },
@@ -41,6 +43,9 @@ const routes: Routes = [
     ProductDetailsComponent,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
   ],
   providers: [AuthService, AuthGateService],
   declarations: [AppComponent, NavbarComponent],

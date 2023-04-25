@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { take, combineLatest, BehaviorSubject } from 'rxjs';
 import { Product, ProductService } from './product.service';
+import { Store } from '@ngrx/store';
+import { selectProducts } from '../reducers';
 
 export interface Cart {
   id: number;
@@ -24,7 +26,7 @@ export interface DetailedCart {
 export class CartService {
   constructor(
     private _http: HttpClient,
-    private _productService: ProductService
+    private _store: Store
   ) {}
   private userId: number;
   private detailedCart: BehaviorSubject<DetailedCart> = new BehaviorSubject({
@@ -36,7 +38,7 @@ export class CartService {
       this.userId = id;
       combineLatest([
         this._http.get<Cart>(`https://fakestoreapi.com/carts/${id}`),
-        this._productService.getProducts(),
+        this._store.select(selectProducts),
       ]).subscribe(([baseCart, products]) => {
         this.detailedCart.next(this.generateDetailedCart(baseCart, products));
       });
@@ -64,8 +66,7 @@ export class CartService {
       this.adjustQty(productId, quantity + productInCart.qty);
       alert(`Added ${quantity} to cart`);
     } else {
-      this._productService
-        .getProducts()
+      this._store.select(selectProducts)
         .pipe(take(1))
         .subscribe((prods) => {
           const productDetails = prods.find((p) => p.id === productId);

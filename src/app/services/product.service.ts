@@ -18,14 +18,10 @@ export interface Product {
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   constructor(private _http: HttpClient) {}
-  private products: Observable<Product[]>;
   getProducts() {
-    if (!this.products) {
-      this.products = this._http.get<Product[]>(
-        'https://fakestoreapi.com/products'
-      );
-    }
-    return this.products;
+    return this._http.get<Product[]>(
+      'https://fakestoreapi.com/products'
+    );
   }
   getProductById(id: string) {
     return this._http.get<Product>(`https://fakestoreapi.com/products/${id}`);

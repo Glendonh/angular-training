@@ -1,20 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductCardComponent } from '../product-card/product-card.component';
-import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
+import { Store } from '@ngrx/store';
+import { ProductCardComponent } from '../product-card/product-card.component';
+import { Product } from '../../services/product.service';
+import { selectProducts } from '../../reducers';
 
 @Component({
   standalone: true,
@@ -24,10 +14,10 @@ interface Product {
   imports: [CommonModule, ProductCardComponent],
 })
 export class ShopComponent implements OnInit {
-  constructor(private _productService: ProductService) {}
+  constructor(private _store: Store) {}
   products: Observable<Product[]>;
 
   ngOnInit() {
-    this.products = this._productService.getProducts();
+    this.products = this._store.select(selectProducts)
   }
 }
