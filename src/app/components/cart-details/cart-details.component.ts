@@ -6,6 +6,7 @@ import {
   CartProduct,
 } from '../../services/cart.service';
 
+
 @Component({
   standalone: true,
   selector: 'app-cart-details',

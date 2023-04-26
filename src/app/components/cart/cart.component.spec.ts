@@ -5,6 +5,8 @@ import { CartComponent } from "./cart.component";
 import { Product } from "../../services/product.service";
 import { Cart } from "../../services/cart.service";
 import { of } from "rxjs";
+import {provideMockStore} from "@ngrx/store/testing"
+import { selectProducts } from "../../reducers";
 
 const mockProducts: Product[] = [
   {
@@ -65,6 +67,8 @@ const mockCart: Cart = {
   ]
 }
 
+const initialState = {products: []}
+
 class MockHttp {
   get(route: string) {
     if(route.includes('products')) {
@@ -79,8 +83,11 @@ class MockHttp {
 describe('cart', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: HttpClient, useClass: MockHttp }]
-    })
+      providers: [
+        { provide: HttpClient, useClass: MockHttp },
+        provideMockStore({initialState, selectors: [{selector: selectProducts, value: mockProducts}]})
+      ]
+    }).compileComponents()
   })
   it('should render cart', async () => {
     const Cart = await render(CartComponent);

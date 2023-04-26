@@ -3,9 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { ShopComponent } from './shop.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { Product, ProductService } from '../../services/product.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
+import { provideMockStore } from '@ngrx/store/testing';
+import { selectProducts } from '../../reducers';
 
-const dummyProducts: Observable<Product[]> = of([
+const dummyProducts: Product[] = [
   {
     "id": 1,
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -42,11 +44,11 @@ const dummyProducts: Observable<Product[]> = of([
       "count": 500
     }
   }
-]);
+];
 
 class MockProductService {
   getProducts() {
-    return dummyProducts;
+    return of(dummyProducts);
   }
 }
 
@@ -54,7 +56,10 @@ describe('shop page', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{provide: ProductService, useClass: MockProductService}]
+      providers: [
+        {provide: ProductService, useClass: MockProductService},
+        provideMockStore({ selectors: [{ selector: selectProducts, value: dummyProducts }] })
+      ]
     }).compileComponents()
   })
   it('should render shop page', async () => {
