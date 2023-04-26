@@ -6,5 +6,5 @@ const initialState: Product[] = []
 
 export const productReducer = createReducer(
   initialState,
-  on(ProductApiActions.fetchProducts, (state, {products}) => products)
+  on(ProductApiActions.loadProducts, (state, {products}) => products)
 );

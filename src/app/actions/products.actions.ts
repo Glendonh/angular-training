@@ -1,9 +1,10 @@
-import { createActionGroup, props } from "@ngrx/store";
+import { createActionGroup, props, emptyProps } from "@ngrx/store";
 import { Product } from "../services/product.service";
 
 export const ProductApiActions = createActionGroup({
   source: 'ProductApi',
   events: {
-    'Fetch Products': props<{products: Product[]}>()
+    'Fetch Products': emptyProps(),
+    'Load Products': props<{products: Product[]}>()
   }
 });

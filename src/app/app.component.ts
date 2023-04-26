@@ -16,8 +16,9 @@ export class AppComponent implements OnInit {
   name = 'Extra Fake Store';
   constructor(private _productService: ProductService, private _store: Store) {}
   ngOnInit(): void {
-      this._productService.getProducts().subscribe((products) => {
-        this._store.dispatch(ProductApiActions.fetchProducts({products}))
-      })
+      this._store.dispatch(ProductApiActions.fetchProducts())
+      // this._productService.getProducts().subscribe((products) => {
+      //   this._store.dispatch(ProductApiActions.loadProducts({products}))
+      // })
   }
 }

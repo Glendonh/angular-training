@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { take, combineLatest, BehaviorSubject } from 'rxjs';
-import { Product, ProductService } from './product.service';
+import { Product } from './product.service';
 import { Store } from '@ngrx/store';
 import { selectProducts } from '../reducers';
 
@@ -33,11 +33,14 @@ export class CartService {
     cartProducts: [],
     totalPrice: 0,
   });
+  getBaseCartById(id: number) {
+    return this._http.get<Cart>(`https://fakestoreapi.com/carts/${id}`)
+  }
   getDetailedCartById(id: number) {
     if (this.userId !== id) {
       this.userId = id;
       combineLatest([
-        this._http.get<Cart>(`https://fakestoreapi.com/carts/${id}`),
+        this.getBaseCartById(id),
         this._store.select(selectProducts),
       ]).subscribe(([baseCart, products]) => {
         this.detailedCart.next(this.generateDetailedCart(baseCart, products));

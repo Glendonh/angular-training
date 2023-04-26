@@ -15,6 +15,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGateService } from './services/auth-gate.service';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects } from './effects/products.effects';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent, canActivate: [AuthGateService] },
@@ -46,6 +48,7 @@ const routes: Routes = [
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
+    EffectsModule.forRoot([ProductsEffects]),
   ],
   providers: [AuthService, AuthGateService],
   declarations: [AppComponent, NavbarComponent],
