@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyPipe, CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
 import { ProductService, Product } from '../../services/product.service';
-import { CartService } from '../../services/cart.service';
+import { CartActions } from 'src/app/actions/cart.actions';
 
 @Component({
   standalone: true,
@@ -15,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _productService: ProductService,
-    private _cartService: CartService
+    private _store: Store
   ) {}
   product: Product;
   qty: number = 1;
@@ -28,7 +29,10 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
   addToCart() {
-    this._cartService.addToCart(this.product.id, this.qty);
+    this._store.dispatch(CartActions.addToCart({
+      productId: this.product.id,
+      quantity: this.qty
+    }));
     this.qty = 1;
   }
 
@@ -38,6 +42,5 @@ export class ProductDetailsComponent implements OnInit {
         this.product = res;
       });
     });
-    this._cartService.getDetailedCartById(1);
   }
 }

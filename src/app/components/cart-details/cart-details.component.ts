@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store'
+import { CartActions } from '../../actions/cart.actions'
 import {
-  CartService,
   DetailedCart,
   CartProduct,
 } from '../../services/cart.service';
@@ -15,10 +16,10 @@ import {
   imports: [CommonModule],
 })
 export class CartDetailsComponent {
-  constructor(private cartService: CartService) {}
+  constructor(private store: Store) {}
   @Input() detailedCart: DetailedCart;
   adjustQty(productId: number, newQuantity: number) {
-    this.cartService.adjustQty(productId, newQuantity);
+    this.store.dispatch(CartActions.adjustQuantity({productId, newQuantity}))
   }
   findTotalPrice(cartProducts: CartProduct[]) {
     return cartProducts.reduce((acc, product) => {

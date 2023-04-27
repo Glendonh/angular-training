@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService, Cart, DetailedCart } from '../../services/cart.service';
+import { Store } from '@ngrx/store';
+import { DetailedCart } from '../../services/cart.service';
+import { selectCart } from '../../reducers';
 import { Observable } from 'rxjs';
 import { CartDetailsComponent } from '../cart-details/cart-details.component';
 
@@ -12,10 +14,10 @@ import { CartDetailsComponent } from '../cart-details/cart-details.component';
   imports: [CommonModule, CartDetailsComponent],
 })
 export class CartComponent implements OnInit {
-  constructor(private _cartService: CartService) {}
+  constructor(private store: Store) {}
   detailedCart: Observable<DetailedCart>;
 
   ngOnInit() {
-    this.detailedCart = this._cartService.getDetailedCartById(1);
+    this.detailedCart = this.store.select(selectCart);
   }
 }
