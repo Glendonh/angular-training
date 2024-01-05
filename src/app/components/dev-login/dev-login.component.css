@@ -1,0 +1,36 @@
+.users-table {
+  padding: 0.5rem;
+  font-weight: 600;
+  color: #002244;
+  background-color: #a5acaf;
+  border-color: #ccc #002244 #002244 #ccc;
+  border-width: 2px;
+  border-style: solid;
+  box-shadow: 1px 1px 1px #002244, 3px 3px 6px 1px #8091a2;
+  align-self: flex-end;
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #fff;
+  box-shadow: #848484 -1px -1px 0px 1px, #848484 -1px -1px 0px 1px inset;
+}
+
+.user-row {
+  box-shadow: 0px 0px 2px #fff;
+}
+
+td, th {
+  padding: 0.5rem;
+}
+
+.id-btn {
+  padding: 0.5rem;
+  font-weight: 600;
+  color: #002244;
+  border-color: #ccc #002244 #002244 #ccc;
+  border-width: 2px;
+  border-style: solid;
+  background-color: #a5acaf;
+  box-shadow: 1px 1px 1px #002244, 3px 3px 6px 1px #8091a2;
+  cursor: pointer;
+}

@@ -77,6 +77,8 @@ input {
 
 .hourglass {
   align-self: flex-end;
+  width: 6rem;
+  height: 6rem;
 }
 
 form {

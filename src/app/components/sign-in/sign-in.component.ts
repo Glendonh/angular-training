@@ -8,13 +8,14 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { DevLoginComponent } from '../dev-login/dev-login.component';
 
 @Component({
   standalone: true,
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, DevLoginComponent],
 })
 export class SignInComponent implements OnInit {
   loginForm: FormGroup<{
@@ -24,7 +25,7 @@ export class SignInComponent implements OnInit {
   submitted = false;
   error: Observable<string>;
   loading: Observable<boolean>;
-  imagePath = 'assts/hg.jpeg';
+  isDev = false;
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService

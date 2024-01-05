@@ -36,11 +36,12 @@
       <img
         class="hourglass"
         *ngIf="loading | async"
-        src="/src/assets/hg.jpeg"
+        src="assets/hourglass.gif"
       />
       <button *ngIf="!(loading | async)" class="submit-btn" type="submit">
         Sign In
       </button>
     </form>
   </div>
+  <app-dev-login *ngIf="isDev"></app-dev-login>
 </div>
