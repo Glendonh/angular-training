@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
   submitted = false;
   error: Observable<string>;
   loading: Observable<boolean>;
-  isDev = false;
+  isDev = true;
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService

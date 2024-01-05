@@ -1,15 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
-import {
-  CanActivate,
-  CanActivateChild,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthGateService implements CanActivate, OnInit {
+export class AuthGateService  implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit() {
     console.log('initing');
