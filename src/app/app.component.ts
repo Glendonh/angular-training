@@ -1,4 +1,4 @@
-import 'zone.js/dist/zone';
+import 'zone.js';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ProductApiActions } from './actions/products.actions';
