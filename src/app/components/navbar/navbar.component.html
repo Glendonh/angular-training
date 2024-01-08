@@ -1,8 +1,17 @@
 <nav class="navbar-container">
   <h1>{{ name }}</h1>
-  <div *ngIf="isAuthenticated | async">
-    <a routerLink="/shop">Home</a>
-    <a routerLink="/cart">Cart</a>
-    <a routerLink="/login">Log Out</a>
-  </div>
+  @if (isAuthenticated | async) {
+    <div>
+      <a routerLink="/shop">Home</a>
+      <a routerLink="/cart">
+        Cart
+        @if (cartCount | async) {
+          <span class="cart-badge">
+            {{cartCount | async}}
+          </span>
+        }
+      </a>
+      <a routerLink="/login">Log Out</a>
+    </div>
+  }
 </nav>

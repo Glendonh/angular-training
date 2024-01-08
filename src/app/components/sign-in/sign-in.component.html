@@ -43,5 +43,7 @@
       </button>
     </form>
   </div>
-  <app-dev-login *ngIf="isDev"></app-dev-login>
+  @if (isDev) {
+  <app-dev-login />
+  }
 </div>

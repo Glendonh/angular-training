@@ -1,15 +1,19 @@
 <button (click)="getUsers()">Admin</button>
-<table class="users-table" *ngIf="users | async">
-  <tr>
-    <th>ID</th>
-    <th>Username</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-  </tr>
-  <tr *ngFor="let user of users | async" class="user-row">
-    <td class="id-btn" (click)="selectUser(user)">{{user.id}}</td>
-    <td>{{user.username}}</td>
-    <td>{{user.name?.firstname}}</td>
-    <td>{{user.name?.lastname}}</td>
-  </tr>
-</table>
+@if (users) {
+  <table class="users-table">
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+    @for (user of users | async; track user.id) {
+      <tr class="user-row">
+        <td class="id-btn" (click)="selectUser(user)">{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.name?.firstname}}</td>
+        <td>{{user.name?.lastname}}</td>
+      </tr>
+    }
+  </table>
+}
