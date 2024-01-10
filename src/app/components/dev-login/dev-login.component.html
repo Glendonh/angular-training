@@ -1,5 +1,7 @@
-<button (click)="getUsers()">Admin</button>
-@if (users) {
+@if ((users | async).length) {
+  <button (click)="getUsers()">Admin</button>
+}
+@if (showTable) {
   <table class="users-table">
     <tr>
       <th>ID</th>

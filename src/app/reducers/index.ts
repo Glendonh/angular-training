@@ -9,16 +9,22 @@ import {
 import { productReducer } from './products.reducer';
 import { cartReducer } from './cart.reducer'
 import { authReducer, AuthState } from './auth.reducer';
+import { usersReducer } from './users.reducer';
 import { Product } from '../services/product.service';
 import { DetailedCart } from '../services/cart.service';
+import { User } from '../services/users.service';
 
 export interface State {
   products: Product[];
   cart: DetailedCart;
   auth: AuthState;
+  users: User[];
 }
 
 export const selectProducts = createFeatureSelector<Product[]>('products');
+
+export const selectUsers = createFeatureSelector<User[]>('users')
+
 export const selectCart = createFeatureSelector<DetailedCart>('cart');
 export const selectCartCount = createSelector(selectCart, (cart: DetailedCart) => {
   if (cart?.cartProducts) {
@@ -28,6 +34,7 @@ export const selectCartCount = createSelector(selectCart, (cart: DetailedCart) =
   }
   return 0;
 });
+
 export const selectAuth = createFeatureSelector<AuthState>('auth');
 export const selectAuthError = createSelector(selectAuth, (authState: AuthState) => authState.error);
 export const selectAuthLoading = createSelector(selectAuth, (authState: AuthState) => authState.loading);
@@ -45,7 +52,8 @@ const debug = (reducer: ActionReducer<any>): ActionReducer<any> => {
 export const reducers: ActionReducerMap<State> = {
   products: productReducer,
   cart: cartReducer,
-  auth: authReducer
+  auth: authReducer,
+  users: usersReducer
 };
 
 

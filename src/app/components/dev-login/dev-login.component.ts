@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { UsersService } from 'src/app/services/users.service';
 import { AuthActions } from 'src/app/actions/auth.actions';
+import { State } from '@ngrx/store';
+import { selectUsers } from 'src/app/reducers';
+import { User } from 'src/app/services/users.service';
 
 @Component({
   standalone: true,
@@ -12,14 +15,17 @@ import { AuthActions } from 'src/app/actions/auth.actions';
   styleUrls: ['./dev-login.component.css'],
   imports: [CommonModule]
 })
-export class DevLoginComponent {
+export class DevLoginComponent implements OnInit {
   constructor(
-    private _usersService: UsersService,
     private _store: Store
   ) {}
-  users: Observable<any[]>;
+  users: Observable<User[]>;
+  showTable = false;
+  ngOnInit() {
+    this.users = this._store.select(selectUsers)
+  }
   getUsers() {
-    this.users = this._usersService.getUsers();
+    this.showTable = !this.showTable;
   }
   selectUser(user: any) {
     const {username, password} = user

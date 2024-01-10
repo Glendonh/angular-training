@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthActions } from '../actions/auth.actions';
 import { CartActions } from '../actions/cart.actions';
 import { UsersService } from '../services/users.service';
+import { selectUsers } from '../reducers';
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +16,8 @@ export class AuthEffects {
     private _authService: AuthService,
     private _userService: UsersService,
     private _actions: Actions,
-    private _router: Router
+    private _router: Router,
+    private _store: Store
   ) {}
   
   handleLogin = createEffect(() => this._actions.pipe(
@@ -34,12 +36,11 @@ export class AuthEffects {
 
   findCartId = createEffect(() => this._actions.pipe(
     ofType(AuthActions.loginSuccess),
-    switchMap(action => this._userService.getUsers().pipe(
-      map(users => {
-        const activeUserId = users.find(user => user.username === action.username).id;
-        return CartActions.fetchCart({id: activeUserId})
-      })
-    ))
+    concatLatestFrom(() => this._store.select(selectUsers)),
+    mergeMap(([action, users]) => {
+      const activeUserId = users.find(user => user.username === action.username).id;
+      return of(CartActions.fetchCart({ id: activeUserId }));
+    })
   ))
 
 }

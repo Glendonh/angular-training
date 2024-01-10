@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-interface User {
+export interface User {
   address: {
     city: string;
     geolocation: { lat: string, long: string },
