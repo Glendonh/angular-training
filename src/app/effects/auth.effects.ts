@@ -36,7 +36,6 @@ export class AuthEffects {
     ofType(AuthActions.loginSuccess),
     switchMap(action => this._userService.getUsers().pipe(
       map(users => {
-        console.log({username: action.username, users})
         const activeUserId = users.find(user => user.username === action.username).id;
         return CartActions.fetchCart({id: activeUserId})
       })
