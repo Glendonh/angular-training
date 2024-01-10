@@ -2,7 +2,6 @@ import 'zone.js';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ProductApiActions } from './actions/products.actions';
-import { CartActions } from './actions/cart.actions';
 
 
 @Component({
@@ -17,6 +16,5 @@ export class AppComponent implements OnInit {
   constructor(private _store: Store) {}
   ngOnInit(): void {
       this._store.dispatch(ProductApiActions.fetchProducts())
-      this._store.dispatch(CartActions.fetchCart({id: 1}))
   }
 }

@@ -62,12 +62,14 @@ p {
 }
 
 .num-input {
-  width: 1rem;
+  width: 2rem;
   border-color: #848484 #ccc #ccc #848484;
+  background-color: #fff;
   border-width: 2px;
   border-style: solid;
   margin-left: 2px;
   margin-right: 2px;
+  text-align: center;
 }
 
 .input-row {
