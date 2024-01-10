@@ -7,8 +7,11 @@ import {
   FormControl,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { AuthActions } from 'src/app/actions/auth.actions';
 import { Observable } from 'rxjs';
 import { DevLoginComponent } from '../dev-login/dev-login.component';
+import { Store } from '@ngrx/store';
+import { selectAuthError, selectAuthLoading } from 'src/app/reducers';
 
 @Component({
   standalone: true,
@@ -28,20 +31,20 @@ export class SignInComponent implements OnInit {
   isDev = true;
   constructor(
     private formbuilder: FormBuilder,
-    private authService: AuthService
+    private store: Store
   ) {
     this.loginForm = this.formbuilder.group({ username: '', password: '' });
   }
   onSubmit(val) {
     this.submitted = true;
     if (this.loginForm.status === 'VALID') {
-      this.authService.logIn(this.loginForm.getRawValue());
+      this.store.dispatch(AuthActions.loginUser(this.loginForm.getRawValue()));
     }
   }
 
   ngOnInit() {
-    this.authService.logOut();
-    this.error = this.authService.getError();
-    this.loading = this.authService.getLoading();
+    this.store.dispatch(AuthActions.logout());
+    this.error = this.store.select(selectAuthError);
+    this.loading = this.store.select(selectAuthLoading);
   }
 }

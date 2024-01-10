@@ -8,12 +8,14 @@ import {
 } from '@ngrx/store';
 import { productReducer } from './products.reducer';
 import { cartReducer } from './cart.reducer'
+import { authReducer, AuthState } from './auth.reducer';
 import { Product } from '../services/product.service';
 import { DetailedCart } from '../services/cart.service';
 
 export interface State {
   products: Product[];
   cart: DetailedCart;
+  auth: AuthState;
 }
 
 export const selectProducts = createFeatureSelector<Product[]>('products');
@@ -25,7 +27,12 @@ export const selectCartCount = createSelector(selectCart, (cart: DetailedCart) =
     }, 0)
   }
   return 0;
-})
+});
+export const selectAuth = createFeatureSelector<AuthState>('auth');
+export const selectAuthError = createSelector(selectAuth, (authState: AuthState) => authState.error);
+export const selectAuthLoading = createSelector(selectAuth, (authState: AuthState) => authState.loading);
+export const selectIsLoggedIn = createSelector(selectAuth, (authState: AuthState) => authState.isLoggedIn);
+export const selectAuthUser = createSelector(selectAuth, (authState: AuthState) => authState.username);
 
 
 const debug = (reducer: ActionReducer<any>): ActionReducer<any> => {
@@ -37,7 +44,8 @@ const debug = (reducer: ActionReducer<any>): ActionReducer<any> => {
 
 export const reducers: ActionReducerMap<State> = {
   products: productReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  auth: authReducer
 };
 
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
 import { UsersService } from 'src/app/services/users.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthActions } from 'src/app/actions/auth.actions';
 
 @Component({
   standalone: true,
@@ -14,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DevLoginComponent {
   constructor(
     private _usersService: UsersService,
-    private _authService: AuthService
+    private _store: Store
   ) {}
   users: Observable<any[]>;
   getUsers() {
@@ -22,6 +23,6 @@ export class DevLoginComponent {
   }
   selectUser(user: any) {
     const {username, password} = user
-    this._authService.logIn({username, password})
+    this._store.dispatch(AuthActions.loginUser({username, password}))
   }
 }

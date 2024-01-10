@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectCartCount } from 'src/app/reducers';
+import { selectCartCount, selectIsLoggedIn } from 'src/app/reducers';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   cartCount: Observable<number>;
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.getAuthObservable();
+    this.isAuthenticated = this._store.select(selectIsLoggedIn);
     this.cartCount = this._store.select(selectCartCount)
   }
 }
