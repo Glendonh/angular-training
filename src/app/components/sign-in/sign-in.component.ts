@@ -43,7 +43,6 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(AuthActions.logout());
     this.error = this.store.select(selectAuthError);
     this.loading = this.store.select(selectAuthLoading);
   }
