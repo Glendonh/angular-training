@@ -44,8 +44,10 @@ export const selectAuthUser = createSelector(selectAuth, (authState: AuthState) 
 
 const debug = (reducer: ActionReducer<any>): ActionReducer<any> => {
   return (state, action) => {
-    console.log({state, action})
-    return reducer(state, action)
+    const newState = reducer(state, action);
+    const {type, ...payload} = action
+    console.log(type, {payload, prevState: state, newState});
+    return newState;
   }
 }
 
